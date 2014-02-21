@@ -2,19 +2,25 @@
 require "cuba"
 require "cuba/render"
 
+# plugins
+require './plugins/enviroment'
+
 # rack
 require "rack/protection"
-require 'rack-livereload'
 
 # midleware
 Cuba.use Rack::Session::Cookie, :secret => "__a_very_long_string__"
 Cuba.use Rack::Protection
-Cuba.use Rack::LiveReload
 
-# settings
 Cuba.plugin Cuba::Render
+Cuba.plugin Environment
 
 Cuba.define do
+  on development? do
+    require 'rack-livereload'
+    Cuba.use Rack::LiveReload
+  end
+
   on get do
     on "hello" do
       res.write render("views/hello.haml")
