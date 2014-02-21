@@ -6,7 +6,6 @@ gem 'rack-protection'
 gem 'haml'
 gem 'coffee-script'
 gem 'mimemagic'
-gem 'rugged'
 
 # server
 gem 'shotgun'

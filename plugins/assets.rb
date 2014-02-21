@@ -1,15 +1,11 @@
 require 'mimemagic'
-require 'rugged'
+require 'base64'
 
 module Assets
   attr_accessor :git, :assets_cache_string
 
-  def git
-    @git ||= Rugged::Repository.new Dir.pwd
-  end
-
   def assets_cache_string
-    @cache_string ||= git.head.target
+    @cache_string ||= Base64.encode64 Time.now.to_s
   end
 
   def asset_path file

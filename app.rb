@@ -30,7 +30,7 @@ Cuba.use Rack::Session::Cookie, :secret => "__a_very_long_string__"
 Cuba.use Rack::Protection
 
 # grab all the routes
-Dir["#{Dir.pwd}/routes/**/*.rb"].each  { |rb| require rb  }
+Dir["./routes/**/*.rb"].each  { |rb| require rb  }
 
 # set assets
 
