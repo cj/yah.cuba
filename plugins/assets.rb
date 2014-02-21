@@ -5,7 +5,7 @@ module Assets
   attr_accessor :git, :assets_cache_string
 
   def git
-    @git ||= Rugged::Repository.new './'
+    @git ||= Rugged::Repository.new Dir.pwd
   end
 
   def assets_cache_string
