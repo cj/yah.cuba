@@ -34,6 +34,7 @@ GEM
     haml (4.0.5)
       tilt
     http_parser.rb (0.5.3)
+    kgio (2.9.2)
     listen (2.5.0)
       celluloid (>= 0.15.2)
       celluloid-io (>= 0.15.0)
@@ -52,6 +53,7 @@ GEM
       rack
     rack-protection (1.5.2)
       rack
+    raindrops (0.13.0)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.3)
       ffi (>= 0.5.0)
@@ -65,6 +67,10 @@ GEM
     thor (0.18.1)
     tilt (1.4.1)
     timers (1.1.0)
+    unicorn (4.8.2)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
 
 PLATFORMS
   ruby
@@ -78,3 +84,4 @@ DEPENDENCIES
   rack-protection
   shotgun
   thin
+  unicorn

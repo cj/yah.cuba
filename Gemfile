@@ -9,6 +9,7 @@ gem 'coffee-script'
 # server
 gem 'shotgun'
 gem 'thin'
+gem 'unicorn'
 
 # extras
 group :development do
