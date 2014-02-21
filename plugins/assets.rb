@@ -42,15 +42,15 @@ module Assets
           res.write render("assets/#{file}.#{ext}")
         else
           if file[/bower/]
-            res.write File.read "assets/#{file}.#{ext}"
+            res.write File.read "#{Dir.pwd}/assets/#{file}.#{ext}"
           else
             case ext
             when 'css'
-              res.write File.read "assets/stylesheets/#{file}.#{ext}"
+              res.write File.read "#{Dir.pwd}/assets/stylesheets/#{file}.#{ext}"
             when 'js'
-              res.write File.read "assets/javascripts/#{file}.#{ext}"
+              res.write File.read "#{Dir.pwd}/assets/javascripts/#{file}.#{ext}"
             else
-              res.write File.read "assets/#{file}.#{ext}"
+              res.write File.read "#{Dir.pwd}/assets/#{file}.#{ext}"
             end
           end
         end
