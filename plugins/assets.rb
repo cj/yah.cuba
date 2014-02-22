@@ -48,7 +48,7 @@ module Assets
         else
           ext_path = 'images'
         end
-        "/public/#{assets_cache_string}/#{ext_path}/#{file}"
+        "/#{assets_cache_string}/#{ext_path}/#{file}"
       end
     else
       "/assets/#{file}"
