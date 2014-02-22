@@ -41,8 +41,7 @@ Cuba.image_assets [
 Cuba.css_assets [
   'bower/bootstrap/dist/css/bootstrap.min.css',
   'bower/font-awesome/css/font-awesome.min.css',
-  'style.css',
-  'test.scss'
+  'style.css'
 ]
 
 if ENV['RACK_ENV'] == 'production'
