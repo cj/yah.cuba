@@ -21,6 +21,7 @@ GEM
     coffee-script-source (1.7.0)
     cuba (3.1.0)
       rack
+    daemons (1.1.9)
     em-websocket (0.5.0)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.5.3)
@@ -71,6 +72,10 @@ GEM
     shotgun (0.9)
       rack (>= 1.0)
     slop (3.4.7)
+    thin (1.6.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 1.0.0)
+      rack (>= 1.0.0)
     thor (0.18.1)
     tilt (1.4.1)
     timers (1.1.0)
@@ -93,3 +98,4 @@ DEPENDENCIES
   rugged
   sass
   shotgun
+  thin

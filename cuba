@@ -27,7 +27,7 @@ command :s do |c|
   # c.example 'description', 'command example'
   # c.option '--some-switch', 'Some switch that does something'
   c.action do |args, options|
-    system('shotgun --server=puma -p 9292 config.ru')
+    system('shotgun --server=thin -p 9292 config.ru')
   end
 end
 

@@ -51,7 +51,12 @@ module Assets
         "/#{assets_cache_string}/#{ext_path}/#{file}"
       end
     else
-      "/assets/#{file}"
+      case file[/(\.[^.]+)$/]
+      when '.css', '.js'
+        "/assets/#{file}"
+      else
+        "/assets/images/#{file}"
+      end
     end
   end
 
