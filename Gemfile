@@ -10,8 +10,7 @@ gem 'sass'
 
 # server
 gem 'shotgun'
-gem 'thin'
-gem 'unicorn'
+gem 'puma'
 
 # extras
 gem 'commander', github: 'visionmedia/commander'
