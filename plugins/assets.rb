@@ -11,12 +11,12 @@ module Assets
     if ENV['RACK_ENV'] == 'production'
       app.use Rack::Static,
         urls: [
-          "/public/#{app.assets_cache_string}/stylesheets",
-          "/public/#{app.assets_cache_string}/javascripts",
-          "/public/#{app.assets_cache_string}/bower",
-          "/public/#{app.assets_cache_string}/images",
+          "/#{app.assets_cache_string}/stylesheets",
+          "/#{app.assets_cache_string}/javascripts",
+          "/#{app.assets_cache_string}/bower",
+          "/#{app.assets_cache_string}/images",
         ],
-        root: './',
+        root: 'public',
         :header_rules => [
           # Cache all static files in public caches (e.g. Rack::Cache)
           #  as well as in the browser
@@ -38,7 +38,7 @@ module Assets
   def asset_path file
     if production?
       if file[/bower/]
-        "/public/#{assets_cache_string}/#{file}"
+        "/#{assets_cache_string}/#{file}"
       else
         case file[/(\.[^.]+)$/]
         when '.css'
