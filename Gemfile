@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'mysql2'
+gem 'activerecord'
+gem 'mini_record'
+
 # app
 gem 'cuba'
 gem 'rack-protection'
@@ -11,6 +15,7 @@ gem 'sass'
 # server
 gem 'shotgun'
 gem 'puma'
+gem 'thin'
 
 # extras
 gem 'commander', github: 'visionmedia/commander'
@@ -24,5 +29,4 @@ end
 group :development, :test do
   gem 'pry'
   gem 'awesome_print'
-  gem 'thin'
 end
