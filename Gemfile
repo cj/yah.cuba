@@ -16,6 +16,7 @@ gem 'sass'
 gem 'shotgun'
 gem 'puma'
 gem 'thin'
+gem 'unicorn'
 
 # extras
 gem 'commander', github: 'visionmedia/commander'
