@@ -4,16 +4,32 @@ require 'base64'
 module Assets
   attr_accessor :git, :assets_cache_string
 
+  def self.setup app
+    if ENV['RACK_ENV'] == 'production'
+      app.use Rack::Static,
+        urls: %w[/stylesheets /javascripts /images],
+        root: File.expand_path("./public", __dir__)
+    end
+  end
+
   def assets_cache_string
-    @cache_string ||= Base64.encode64 Time.now.to_s
+    if ENV['RACK_ENV'] == 'production'
+      @cache_string ||= File.read "#{Dir.pwd}/sha"
+    else
+      @cache_string ||= git.head.target
+    end
   end
 
   def asset_path file
-    "/assets/#{assets_cache_string}/#{file}"
+    "/assets/#{file}"
   end
 
   def css_assets
     Cuba.settings[:assets][:css]
+  end
+
+  def accepted_assets
+    "(.*)\.(js|css|eot|svg|ttf|woff|png|gif|jpg|jpeg)$"
   end
 
   module ClassMethods
@@ -25,14 +41,17 @@ module Assets
         settings[:assets][:css] << path
       end
     end
+
+    def all_assets
+      settings[:assets]
+    end
   end
 
   class Routes < Cuba
     define do
-      on get, "(.*)\.(js|css|eot|svg|ttf|woff|png|gif|jpg|jpeg)$" do |file, ext|
+      on get, development?, accepted_assets do |file, ext|
         res.headers["Content-Type"] = "#{MimeMagic.by_extension(ext).to_s}; charset=utf-8"
-
-        file = file.gsub(/^.*?\//, '')
+        # file = file.gsub(/^.*?\//, '')
 
         if not ext[/(js|css|eot|svg|ttf|woff|png|gif|jpg|jpeg)/]
           res.write render("assets/#{file}.#{ext}")

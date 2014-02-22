@@ -39,6 +39,9 @@ Cuba.css_assets [
   'bower/font-awesome/css/font-awesome.min.css',
   'style.css'
 ]
+if ENV['RACK_ENV'] == 'production'
+end
+
 
 Cuba.define do
   on get, 'assets' do

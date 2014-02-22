@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/visionmedia/commander.git
+  revision: 16f099a9ac5038f7f6457a74c98abcd32b269932
+  specs:
+    commander (4.1.6)
+      highline (~> 1.6.11)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -34,6 +41,7 @@ GEM
       multi_json (~> 1.8)
     haml (4.0.5)
       tilt
+    highline (1.6.20)
     http_parser.rb (0.5.3)
     kgio (2.9.2)
     listen (2.5.0)
@@ -59,6 +67,7 @@ GEM
     rb-fsevent (0.9.4)
     rb-inotify (0.9.3)
       ffi (>= 0.5.0)
+    rugged (0.19.0)
     shotgun (0.9)
       rack (>= 1.0)
     slop (3.4.7)
@@ -80,6 +89,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   coffee-script
+  commander!
   cuba
   guard-livereload
   haml
@@ -87,6 +97,7 @@ DEPENDENCIES
   pry
   rack-livereload
   rack-protection
+  rugged
   shotgun
   thin
   unicorn

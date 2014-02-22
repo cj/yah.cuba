@@ -13,9 +13,12 @@ gem 'thin'
 gem 'unicorn'
 
 # extras
+gem 'commander', github: 'visionmedia/commander'
+
 group :development do
   gem 'rack-livereload'
   gem 'guard-livereload', require: false
+  gem 'rugged'
 end
 
 group :development, :test do
