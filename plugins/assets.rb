@@ -16,7 +16,12 @@ module Assets
           "/public/#{app.assets_cache_string}/bower",
           "/public/#{app.assets_cache_string}/images",
         ],
-        root: './'
+        root: './',
+        :header_rules => [
+          # Cache all static files in public caches (e.g. Rack::Cache)
+          #  as well as in the browser
+          [:all, {'Cache-Control' => 'public, max-age=31536000'}]
+        ]
       app.use Rack::Deflater
     end
   end
