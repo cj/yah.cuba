@@ -70,6 +70,8 @@ command :compile do |c|
             File.write(tmp_file, content)
             system "minify #{tmp_file} #{output_file}"
             File.delete tmp_file
+          elsif folder == 'images'
+            system "cp #{location_file} #{output_file}"
           else
             system "minify #{location_file} #{output_file}"
           end

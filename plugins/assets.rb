@@ -17,6 +17,7 @@ module Assets
           "/public/#{app.assets_cache_string}/images",
         ],
         root: './'
+      app.use Rack::Deflater
     end
   end
 
@@ -34,14 +35,13 @@ module Assets
       if file[/bower/]
         "/public/#{assets_cache_string}/#{file}"
       else
-        puts file[/(\.[^.]+)$/]
         case file[/(\.[^.]+)$/]
         when '.css'
           ext_path = 'stylesheets'
         when '.js'
           ext_path = 'javascripts'
         else
-          ext_path = ''
+          ext_path = 'images'
         end
         "/public/#{assets_cache_string}/#{ext_path}/#{file}"
       end
