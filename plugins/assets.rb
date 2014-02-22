@@ -79,10 +79,10 @@ module Assets
 
     def image_assets files
       settings[:assets] ||= {}
-      settings[:assets][:css] ||= []
+      settings[:assets][:img] ||= []
 
       files.each do |path|
-        settings[:assets][:css] << path
+        settings[:assets][:img] << path
       end
     end
 
