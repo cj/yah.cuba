@@ -80,4 +80,3 @@ command :compile do |c|
     end
   end
 end
-
