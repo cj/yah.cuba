@@ -1,5 +1,8 @@
 require 'mimemagic'
 require 'base64'
+if ENV['RACK_ENV'] != 'production'
+  require 'rugged'
+end
 
 module Assets
   attr_accessor :git, :assets_cache_string
@@ -7,8 +10,13 @@ module Assets
   def self.setup app
     if ENV['RACK_ENV'] == 'production'
       app.use Rack::Static,
-        urls: %w[/stylesheets /javascripts /images],
-        root: File.expand_path("./public", __dir__)
+        urls: [
+          "/public/#{app.assets_cache_string}/stylesheets",
+          "/public/#{app.assets_cache_string}/javascripts",
+          "/public/#{app.assets_cache_string}/bower",
+          "/public/#{app.assets_cache_string}/images",
+        ],
+        root: './'
     end
   end
 
@@ -16,12 +24,34 @@ module Assets
     if ENV['RACK_ENV'] == 'production'
       @cache_string ||= File.read "#{Dir.pwd}/sha"
     else
-      @cache_string ||= git.head.target
+      repo = Rugged::Repository.new('./')
+      @cache_string ||= repo.head.target
     end
   end
 
   def asset_path file
-    "/assets/#{file}"
+    if production?
+      if file[/bower/]
+        "/public/#{assets_cache_string}/#{file}"
+      else
+        puts file[/(\.[^.]+)$/]
+        case file[/(\.[^.]+)$/]
+        when '.css'
+          ext_path = 'stylesheets'
+        when '.js'
+          ext_path = 'javascripts'
+        else
+          ext_path = ''
+        end
+        "/public/#{assets_cache_string}/#{ext_path}/#{file}"
+      end
+    else
+      "/assets/#{file}"
+    end
+  end
+
+  def image_assets
+    Cuba.settings[:assets][:css]
   end
 
   def css_assets
@@ -42,8 +72,26 @@ module Assets
       end
     end
 
+    def image_assets files
+      settings[:assets] ||= {}
+      settings[:assets][:css] ||= []
+
+      files.each do |path|
+        settings[:assets][:css] << path
+      end
+    end
+
     def all_assets
       settings[:assets]
+    end
+
+    def assets_cache_string
+      if ENV['RACK_ENV'] == 'production'
+        @cache_string ||= File.read "#{Dir.pwd}/sha"
+      else
+        repo = Rugged::Repository.new('./')
+        @cache_string ||= repo.head.target
+      end
     end
   end
 

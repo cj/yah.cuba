@@ -1,8 +1,81 @@
 #!/usr/bin/env ruby
-gem_dir = File.expand_path("..",File.dirname(__FILE__))
-$LOAD_PATH.unshift gem_dir# Look in gem directory for resources first.
-exec_type = ARGV[0]
 
-if exec_type == 's' then
-  system('shotgun --server=thin -p 9292 config.ru')
+ENV['RACK_ENV'] = 'development'
+
+require 'rubygems'
+require 'bundler/setup'
+require 'commander/import'
+require './app'
+require 'sass/plugin/rack'
+
+program :version, '0.0.1'
+program :description, 'stuff to help with your cuba app'
+
+command :s do |c|
+  c.syntax = 'cuba init'
+  c.summary = 'install everything needed'
+  c.action do |args, options|
+    system 'bundle install'
+    system 'npm install -g minify'
+  end
 end
+
+command :s do |c|
+  c.syntax = 'cuba s [options]'
+  c.summary = 'will start the server with shotgun'
+  # c.description = ''
+  # c.example 'description', 'command example'
+  # c.option '--some-switch', 'Some switch that does something'
+  c.action do |args, options|
+    system('shotgun --server=thin -p 9292 config.ru')
+  end
+end
+
+command :compile do |c|
+  c.syntax = 'cuba compile'
+  c.summary = 'compiles assets into public folder'
+  c.action do |args, options|
+    sha = Cuba.assets_cache_string
+    File.write('sha', sha)
+    FileUtils.rm_rf('public')
+
+    Cuba.all_assets.each do |type, files|
+      files.each do |file|
+        file.scan(/(.*)\.(\w*)/).each do |f, ext|
+          case ext
+          when 'css', 'scss'
+            output_ext = 'css'
+            folder = 'stylesheets'
+          when 'js', 'coffee'
+            output_ext = 'js'
+            folder = 'javascripts'
+          else
+            folder = 'images'
+            output_ext = ext
+          end
+
+          if f[/bower/]
+            output_file = "public/#{sha}/#{f}.#{output_ext}"
+            location_file = "assets/#{f}.#{ext}"
+            FileUtils.mkdir_p(File.dirname(output_file)) unless File.exists? output_file
+          else
+            output_file = "public/#{sha}/#{folder}/#{f}.#{output_ext}"
+            location_file = "assets/#{folder}/#{f}.#{ext}"
+            FileUtils.mkdir_p(File.dirname(output_file)) unless File.exists? output_file
+          end
+
+          if ext[/(scss|coffee)/]
+            tmp_file = "compiled.#{output_ext}"
+            content = Tilt.new(location_file).render
+            File.write(tmp_file, content)
+            system "minify #{tmp_file} #{output_file}"
+            File.delete tmp_file
+          else
+            system "minify #{location_file} #{output_file}"
+          end
+        end
+      end
+    end
+  end
+end
+

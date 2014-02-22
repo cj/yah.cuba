@@ -34,11 +34,17 @@ Dir["./routes/**/*.rb"].each  { |rb| require rb  }
 
 # set assets
 
+Cuba.image_assets [
+  'logo.gif'
+]
+
 Cuba.css_assets [
   'bower/bootstrap/dist/css/bootstrap.min.css',
   'bower/font-awesome/css/font-awesome.min.css',
-  'style.css'
+  'style.css',
+  'test.scss'
 ]
+
 if ENV['RACK_ENV'] == 'production'
 end
 
