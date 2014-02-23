@@ -1,5 +1,8 @@
 require 'mimemagic'
 require 'base64'
+require 'haml'
+require 'sass'
+
 if ENV['RACK_ENV'] != 'production'
   require 'rugged'
 end
@@ -112,18 +115,18 @@ module Assets
         # file = file.gsub(/^.*?\//, '')
 
         if not ext[/(js|css|eot|svg|ttf|woff|png|gif|jpg|jpeg)/]
-          res.write render("assets/#{file}.#{ext}")
+          res.write render("app/assets/#{file}.#{ext}")
         else
           if file[/bower/]
-            res.write File.read "#{Dir.pwd}/assets/#{file}.#{ext}"
+            res.write File.read "#{Dir.pwd}/app/assets/#{file}.#{ext}"
           else
             case ext
             when 'css'
-              res.write File.read "#{Dir.pwd}/assets/stylesheets/#{file}.#{ext}"
+              res.write File.read "#{Dir.pwd}/app/assets/stylesheets/#{file}.#{ext}"
             when 'js'
-              res.write File.read "#{Dir.pwd}/assets/javascripts/#{file}.#{ext}"
+              res.write File.read "#{Dir.pwd}/app/assets/javascripts/#{file}.#{ext}"
             else
-              res.write File.read "#{Dir.pwd}/assets/#{file}.#{ext}"
+              res.write File.read "#{Dir.pwd}/app/assets/#{file}.#{ext}"
             end
           end
         end

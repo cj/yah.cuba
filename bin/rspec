@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'bundler/setup'
+
+require_relative "../app.rb"
+
+require 'rspec'
+require "capybara/dsl"
+require "rack/test"
+require 'awesome_print'
+require 'pry'
+
+module RSpecMixin
+  include Rack::Test::Methods
+  def app() Cuba end
+end
+
+Capybara.app = Cuba
+
+RSpec.configure do |c|
+  c.include Rack::Test::Methods
+  c.include Capybara::DSL
+  c.include RSpecMixin
+end
+
+load Gem.bin_path('rspec', 'rspec')

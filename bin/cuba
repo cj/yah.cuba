@@ -27,7 +27,7 @@ command :s do |c|
   # c.example 'description', 'command example'
   # c.option '--some-switch', 'Some switch that does something'
   c.action do |args, options|
-    system('shotgun --server=thin -p 9292 config.ru')
+    system('mr-sparkle')
   end
 end
 
@@ -56,11 +56,11 @@ command :compile do |c|
 
           if f[/bower/]
             output_file = "public/#{sha}/#{f}.#{output_ext}"
-            location_file = "assets/#{f}.#{ext}"
+            location_file = "app/assets/#{f}.#{ext}"
             FileUtils.mkdir_p(File.dirname(output_file)) unless File.exists? output_file
           else
             output_file = "public/#{sha}/#{folder}/#{f}.#{output_ext}"
-            location_file = "assets/#{folder}/#{f}.#{ext}"
+            location_file = "app/assets/#{folder}/#{f}.#{ext}"
             FileUtils.mkdir_p(File.dirname(output_file)) unless File.exists? output_file
           end
 

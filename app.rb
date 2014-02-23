@@ -3,50 +3,43 @@
 require "cuba"
 require "cuba/render"
 
-# plugins
-Dir["./plugins/**/*.rb"].each  { |rb| require rb  }
+require "./plugin/enviroment"
+Cuba.plugin Environment
+
+# database
+require 'active_record'
 
 # rack
 require "rack/protection"
 
 ## development only
-if ENV['RACK_ENV'] == 'development'
+if Cuba.development?
   require 'rack-livereload'
   Cuba.use Rack::LiveReload
 end
-if ENV['RACK_ENV'] == 'development' or ENV['RACK_ENV'] == 'test'
+
+if Cuba.development? or Cuba.test?
   require 'pry'
   require 'awesome_print'
 end
 
-## plugins
-Cuba.plugin Cuba::Render
-Cuba.settings[:render][:template_engine] = 'haml'
-Cuba.plugin Environment
-Cuba.plugin Assets
-
 ## midleware
 Cuba.use Rack::Session::Cookie, :secret => "__a_very_long_string__"
 Cuba.use Rack::Protection
+Cuba.use Rack::Reloader
 
-# grab all the routes
-Dir["./routes/**/*.rb"].each  { |rb| require rb  }
+## add renderer and assets
+Cuba.plugin Cuba::Render
+Cuba.settings[:render][:template_engine] = 'haml'
+Cuba.settings[:render][:views] = File.expand_path("app/views", Dir.pwd)
+require './plugin/assets'
+Cuba.plugin Assets
 
-# set assets
+## configs
+Dir["./config/**/*.rb"].each  { |rb| require rb  }
 
-Cuba.image_assets [
-  'logo.gif'
-]
-
-Cuba.css_assets [
-  'bower/bootstrap/dist/css/bootstrap.min.css',
-  'bower/font-awesome/css/font-awesome.min.css',
-  'style.css'
-]
-
-if ENV['RACK_ENV'] == 'production'
-end
-
+## routes
+Dir["./app/routes/**/*.rb"].each  { |rb| require rb  }
 
 Cuba.define do
   on get, 'assets' do
