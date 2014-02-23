@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'bundler/setup'
+
+require_relative "../app.rb"
+
+require "rack/test"
+require "cuba/capybara"
+require "cuba/test"
+
+load Gem.bin_path('cutest', 'cutest')

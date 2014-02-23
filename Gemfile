@@ -37,4 +37,5 @@ group :test do
   gem 'rspec', '3.0.0.beta2'
   gem 'rack-test'
   gem 'capybara'
+  gem 'cutest'
 end

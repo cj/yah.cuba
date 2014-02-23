@@ -40,6 +40,7 @@ GEM
     coffee-script-source (1.7.0)
     cuba (3.1.0)
       rack
+    cutest (1.2.1)
     daemons (1.1.9)
     diff-lcs (1.2.5)
     em-websocket (0.5.0)
@@ -148,6 +149,7 @@ DEPENDENCIES
   coffee-script
   commander!
   cuba
+  cutest
   guard-livereload
   haml
   mimemagic
