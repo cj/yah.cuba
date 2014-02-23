@@ -7,7 +7,7 @@ ActiveRecord::Base.logger = Logger.new(STDERR)
 db = URI.parse ENV['DATABASE_URL']
 
 ActiveRecord::Base.establish_connection(
-    adapter: db.scheme == 'postgres' ? 'pg' : db.scheme,
+    adapter: db.scheme == 'postgres' ? 'postgresql' : db.scheme,
     encoding: 'utf8',
     reconnect: true,
     database: db.path[1..-1],
