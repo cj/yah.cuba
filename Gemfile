@@ -11,15 +11,15 @@ gem 'haml'
 gem 'coffee-script'
 gem 'mimemagic'
 gem 'sass'
+gem 'tilt', '>= 2.0'
+gem 'mab'
+gem 'cuba-sugar'
 
 # server
 gem 'shotgun'
 gem 'puma'
 gem 'thin'
 gem 'unicorn'
-
-# extras
-gem 'commander', github: 'visionmedia/commander'
 
 group :development do
   gem 'rack-livereload'
@@ -31,6 +31,7 @@ group :development, :test do
   gem 'pry'
   gem 'awesome_print'
   gem 'mr-sparkle'
+  gem 'commander', github: 'visionmedia/commander'
 end
 
 group :test do

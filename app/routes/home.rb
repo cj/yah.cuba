@@ -1,8 +1,8 @@
 module Routes
   class Home < Cuba
     define do
-      on root do
-        res.write view("home/index")
+      on default do
+        res.write view("home/index", user: User.new)
       end
     end
   end

@@ -34,6 +34,8 @@ Cuba.settings[:render][:template_engine] = 'haml'
 Cuba.settings[:render][:views] = File.expand_path("app/views", Dir.pwd)
 require './plugin/assets'
 Cuba.plugin Assets
+require './plugin/form_builder'
+Cuba.plugin FormBuilder
 
 ## configs
 Dir["./config/**/*.rb"].each  { |rb| require rb  }
@@ -47,6 +49,6 @@ Cuba.define do
   end
 
   on root do
-    res.write view("home/index")
+    run Routes::Home
   end
 end

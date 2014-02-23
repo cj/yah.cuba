@@ -14,4 +14,4 @@ ActiveRecord::Base.establish_connection(
 
 require 'mini_record'
 
-Dir["./models/**/*.rb"].each  { |rb| require rb  }
+Dir["./app/models/**/*.rb"].each  { |rb| require rb  }
