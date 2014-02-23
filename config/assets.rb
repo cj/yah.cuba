@@ -7,4 +7,3 @@ Cuba.css_assets [
   'bower/font-awesome/css/font-awesome.min.css',
   'style.css'
 ]
-

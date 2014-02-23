@@ -23,8 +23,11 @@ if Cuba.development? or Cuba.test?
   require 'awesome_print'
 end
 
-## midleware
-Cuba.use Rack::Session::Cookie, :secret => "__a_very_long_string__"
+## middleware
+Cuba.use Rack::Session::Cookie,
+  key: ENV["APP_KEY"],
+  secret: ENV["APP_SECRET"]
+
 Cuba.use Rack::Protection
 Cuba.use Rack::Reloader
 
@@ -34,6 +37,8 @@ Cuba.settings[:render][:template_engine] = 'haml'
 Cuba.settings[:render][:views] = File.expand_path("app/views", Dir.pwd)
 require './plugin/assets'
 Cuba.plugin Assets
+require "cuba/sugar/as"
+Cuba.plugin Cuba::Sugar::As
 require './plugin/form_builder'
 Cuba.plugin FormBuilder
 
@@ -41,6 +46,7 @@ Cuba.plugin FormBuilder
 Dir["./config/**/*.rb"].each  { |rb| require rb  }
 
 ## routes
+module Routes end
 Dir["./app/routes/**/*.rb"].each  { |rb| require rb  }
 
 Cuba.define do
@@ -50,5 +56,11 @@ Cuba.define do
 
   on root do
     run Routes::Home
+  end
+
+  on default do
+    as 404 do
+      res.write view("errors/404")
+    end
   end
 end

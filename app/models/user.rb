@@ -3,5 +3,6 @@ class User < ActiveRecord::Base
   field :last_name
 
   has_many :posts
+  has_one :address
 end
 User.auto_upgrade!

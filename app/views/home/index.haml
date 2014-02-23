@@ -1,3 +1,5 @@
 = form_for user do |f|
   = f.input :first_name
   = f.input :last_name
+  = f.fields_for :address do |a|
+    = a.input :line1

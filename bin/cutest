@@ -8,5 +8,7 @@ require_relative "../app.rb"
 require "rack/test"
 require "cuba/capybara"
 require "cuba/test"
+require 'awesome_print'
+require 'pry'
 
 load Gem.bin_path('cutest', 'cutest')

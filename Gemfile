@@ -13,7 +13,7 @@ gem 'mimemagic'
 gem 'sass'
 gem 'tilt', '>= 2.0'
 gem 'mab'
-gem 'cuba-sugar'
+gem 'cuba-sugar', github: 'cj/cuba-sugar'
 
 # server
 gem 'shotgun'
@@ -30,7 +30,7 @@ end
 group :development, :test do
   gem 'pry'
   gem 'awesome_print'
-  gem 'mr-sparkle'
+  gem 'mr-sparkle', github: 'cj/mr-sparkle'
   gem 'commander', github: 'visionmedia/commander'
 end
 

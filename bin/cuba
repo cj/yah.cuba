@@ -2,6 +2,12 @@
 
 ENV['RACK_ENV'] = 'development'
 
+File.write '.env' unless File.exists? '.env'
+File.foreach ".env" do |line|
+  key, value = line.split "="
+  ENV[key] = value.gsub('\n', '')
+end
+
 require 'rubygems'
 require 'bundler/setup'
 require 'commander/import'
@@ -11,7 +17,7 @@ require 'sass/plugin/rack'
 program :version, '0.0.1'
 program :description, 'stuff to help with your cuba app'
 
-command :s do |c|
+command :init do |c|
   c.syntax = 'cuba init'
   c.summary = 'install everything needed'
   c.action do |args, options|
@@ -27,7 +33,10 @@ command :s do |c|
   # c.example 'description', 'command example'
   # c.option '--some-switch', 'Some switch that does something'
   c.action do |args, options|
-    system('mr-sparkle')
+    # env = File.read Dir.pwd + '/.env'
+    # envs = env.split "\n"
+    # system("#{envs.join(' ')} mr-sparkle")
+    system("mr-sparkle")
   end
 end
 
