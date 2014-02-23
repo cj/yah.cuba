@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'pg'
 gem 'mysql2'
 gem 'activerecord'
 gem 'mini_record'
