@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  field :content
+  col :content
 
   belongs_to :user
 end

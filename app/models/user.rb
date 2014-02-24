@@ -1,8 +1,12 @@
 class User < ActiveRecord::Base
-  field :first_name
-  field :last_name
+  col :first_name
+  col :last_name
 
-  has_many :posts
-  has_one :address
+  belongs_to :company
+
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+
+  validates_associated :company
 end
 User.auto_upgrade!

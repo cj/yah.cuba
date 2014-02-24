@@ -15,7 +15,11 @@ module FormBuilder
   def form_for record, options = {}, &block
     raise ArgumentError, "Missing block" unless block_given?
 
-    model_name = record.class.model_name.singular
+    if record.is_form?
+      model_name = record.class.model_name.to_s.gsub(/Form$/, '').underscore
+    else
+      model_name = record.class.model_name.singular
+    end
 
     fields = Fields.new [model_name],record, block
 
@@ -52,11 +56,27 @@ module FormBuilder
       field_name.gsub(/[^a-z0-9]/, '_').gsub(/__/, '_').gsub(/_$/, '')
     end
 
+    def required?(obj, attr)
+      target = (obj.class == Class) ? obj : obj.class
+      target.validators_on(attr).map(&:class).include?(
+        ActiveRecord::Validations::PresenceValidator
+      )
+    end
+
+    def errors? obj, attr
+      obj.errors.messages[attr.to_sym]
+    end
+
     def wrapper field_name, nested_name, input, options
       mab do
-        div class: 'form-group' do
-          label for: id_for(nested_name), class: 'col-sm-2' do
-            field_name.humanize
+        div class: "form-group #{errors?(record, field_name) ? 'has-error has-feedback' : ''}" do
+          label for: id_for(nested_name), class: 'control-label col-sm-2' do
+            if required? record, field_name
+              abbr title: 'required' do
+                text '*'
+              end
+            end
+            text field_name.humanize
           end
           div class: 'col-sm-10' do
             text! input.render
@@ -78,7 +98,17 @@ module FormBuilder
         record_class = record.class.model_name.name.constantize
         record_type = record_class.columns_hash[field_name.to_s].type.to_s.classify
         input_class = "FormBuilder::#{record_type}Input".constantize
-        input = input_class.new nested_name, record, record.send(field_name), options
+
+        data = OpenStruct.new({
+          name: nested_name,
+          record: record,
+          value: record.send(field_name),
+          options: options,
+          errors: record.errors.messages[field_name]
+        })
+
+        input = input_class.new data
+
         wrapper field_name.to_s, nested_name, input, options
       end
 
@@ -88,9 +118,11 @@ module FormBuilder
     def fields_for field_name, options = {}, &block
       content_for :fields do
         names = [].concat models
-        names << field_name
+        names << "#{field_name}_attributes"
 
-        fields = Fields.new names, record.send("build_#{field_name}"), block
+        associated_record = record.send(field_name)
+
+        fields = Fields.new names, associated_record, block
         fields.render
       end
 
@@ -98,9 +130,13 @@ module FormBuilder
     end
   end
 
-  class Input < Struct.new(:name, :record, :value, :options)
+  class Input < Struct.new(:data)
     def id
-      name.gsub(/[^a-z0-9]/, '_').gsub(/__/, '_').gsub(/_$/, '')
+      data.name.gsub(/[^a-z0-9]/, '_').gsub(/__/, '_').gsub(/_$/, '')
+    end
+
+    def errors?
+      data.errors
     end
 
     def render

@@ -1,5 +1,5 @@
 module FormBuilder
-  class StringInput < Input
+  class IntegerInput < Input
     def input
       input_options = {
         name: data.name,
@@ -11,6 +11,7 @@ module FormBuilder
 
       mab do
         input input_options
+
         if errors?
           span class: 'help-block has-error' do
             text data.errors.join ' '

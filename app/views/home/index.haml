@@ -1,5 +1,11 @@
 = form_for user do |f|
   = f.input :first_name
   = f.input :last_name
-  = f.fields_for :address do |a|
-    = a.input :line1
+  = f.fields_for :company do |c|
+    = c.input :name
+    = c.fields_for :address do |a|
+      = a.input :line1
+      = a.input :line2
+      = a.input :city
+      = a.input :state
+      = a.input :zip

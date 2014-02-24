@@ -1,3 +1,5 @@
+require 'mini_record'
+
 ActiveRecord::Base.logger = Logger.new(STDERR)
 
 #These Settings Establish the Proper Database Connection for Heroku Postgres
@@ -18,6 +20,17 @@ ActiveRecord::Base.establish_connection(
     password: db.password
 )
 
-require 'mini_record'
+module ActiveForm
+  extend ActiveSupport::Concern
 
+  included do
+    def is_form?
+      self.class.model_name.to_s[/Form$/]
+    end
+  end
+end
+
+ActiveRecord::Base.send :include, ActiveForm
+
+Dir["./app/models/*.rb"].each  { |rb| require rb  }
 Dir["./app/models/**/*.rb"].each  { |rb| require rb  }
