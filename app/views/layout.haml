@@ -24,28 +24,8 @@
     .wrapper
       / ******HEADER******
       %header.header
-        -# .top-bar
-        -#   .container
-        -#     %ul.social-icons.col-md-6.col-sm-6.col-xs-12.hidden-xs
-        -#       %li
-        -#         %a{href: "#"}
-        -#           %i.fa.fa-twitter
-        -#       %li
-        -#         %a{href: "#"}
-        -#           %i.fa.fa-facebook
-        -#       %li
-        -#         %a{href: "#"}
-        -#           %i.fa.fa-youtube
-        -#       %li
-        -#         %a{href: "#"}
-        -#           %i.fa.fa-linkedin
-        -#       %li
-        -#         %a{href: "#"}
-        -#           %i.fa.fa-google-plus
-        -#       %li.row-end
-        -#         %a{href: "#"}
-        -#           %i.fa.fa-rss
-        -#     / //social-icons
+        .top-bar
+          .container
         -#     %form.pull-right.search-form{role: "search"}
         -#       .form-group
         -#         %input.form-control{placeholder: "Search the site...", type: "text"}/
@@ -60,12 +40,21 @@
           / //logo
           .info.col-md-6.col-sm-6
             %ul.menu-top.navbar-right.hidden-xs
-              %li.divider
-                %a{href: "index.html"} Home
-              %li.divider
-                %a{href: "faq.html"} FAQ
               %li
-                %a{href: "contact.html"} Contact
+                %a{href: "#"}
+                  %i.fa.fa-twitter
+              %li
+                %a{href: "#"}
+                  %i.fa.fa-facebook
+              %li
+                %a{href: "#"}
+                  %i.fa.fa-youtube
+              %li
+                %a{href: "#"}
+                  %i.fa.fa-linkedin
+              %li
+                %a{href: "#"}
+                  %i.fa.fa-google-plus
             / //menu-top
             %br/
             .contact.pull-right
