@@ -1,232 +1,186 @@
 !!!
-%html
+/[if IE 8] <html lang="en" class="ie8">
+/[if IE 9] <html lang="en" class="ie9">
+/ [if !IE]><!
+%html{lang: "en"}
+  / <![endif]
   %head
-    %title Young Actors House
+    %title Responsive website template for education
+    / Meta
+    %meta{charset: "utf-8"}/
+    %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
+    %meta{content: "", name: "description"}/
+    %meta{content: "", name: "author"}/
+    -# %link{href: "favicon.ico", rel: "shortcut icon"}/
+    %link{href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700", rel: "stylesheet", type: "text/css"}/
     - css_assets.each do |file|
       %link{rel: "stylesheet", type: "text/css", href: asset_path(file)}
-  %body
-    / Start Header
-    .topbar.hidden-sm.hidden-xs
-      .container
-        .row
-          .col-md-6
-            %nav.secondary-menu
-              %ul.pull-left
-                %li
-                  %a{href: "#"}
-                    %i.fa.fa-lg.fa-twitter
-                %li
-                  %a{href: "#"}
-                    %i.fa.fa-lg.fa-facebook
-                %li
-                  %a{href: "#"}
-                    %i.fa.fa-lg.fa-github
-                %li
-                  %a{href: "#"}
-                    %i.fa.fa-lg.fa-pinterest
-                %li
-                  %a{href: "#"}
-                    %i.fa.fa-lg.fa-google-plus
-                %li
-                  %a{href: "#"}
-                    %i.fa.fa-lg.fa-skype
-          .col-md-6
-            %nav.secondary-menu
-              %ul.pull-right
-                %li
-                  %a{href: "page-signup.html"} Sign Up
-                %li
-                  %a{href: "page-login.html"} Login
-                %li
-                  %a{href: "page-terms.html"} Terms
-                %li
-                  %a{href: "page-faqs.html"} FAQS
-    %header#sticky-nav.site-header
-      .container
-        .row
-          .col-md-3
-            %h1.logo
-              %a{href: "index.html"}
-                %img{alt: "Site Logo", src: asset_path("logo.gif")}/
-          .col-md-9
-            %button.mmenu-toggle
-              %i.fa.fa-bars.fa-lg
-            %nav.main-menu
-              %ul#main-menu.sf-menu
-                %li
-                  %a{href: "index.html"}
-                    Home
-                    %i.fa.fa-angle-down
-                  %ul.dropdown
-                    %li
-                      %a{href: "index.html"} Homepage version 1
-                    %li
-                      %a{href: "index1.html"} Homepage version 2
-                    %li
-                      %a{href: "index2.html"} Homepage version 3
-                    %li
-                      %a{href: "index3.html"} Homepage version 4
-                    %li
-                      %a{href: "index4.html"} Homepage version 5
-                    %li
-                      %a{href: "index5.html"} Homepage version 6
-                    %li
-                      %a{href: "landing.html"} Landing Page
-                    %li
-                      %a{href: "one-pager.html"} One page Website
-                    %li
-                      %a{href: "one-pager-alt.html"} One page Alt
-                    %li
-                      %a{href: "coming-soon.html"} Coming Soon
-                %li
-                  %a{href: "shop.html"}
-                    Shop
-                    %i.fa.fa-angle-down
-                  %ul.dropdown
-                    %li
-                      %a{href: "shop.html"} Shop full width
-                    %li
-                      %a{href: "shop-left-sidebar.html"} Shop left sidebar
-                    %li
-                      %a{href: "shop-right-sidebar.html"} Shop right sidebar
-                %li.megamenu
-                  %a{href: "#"}
-                    Features
-                    %i.fa.fa-angle-down
-                  %ul.dropdown
-                    %li
-                      .megamenu-container.container
-                        .row
-                          .col-md-3.hidden-sm.hidden-xs
-                            %span.megamenu-sub-title Newest feature
-                            -# %img.margin-20{alt: "", src: "images/screens.png"}/
-                            %p Aliquam enim enim, pharetra in sodales at, interdum sit amet dui.
-                          .col-md-3
-                            %ul.sub-menu
-                              %li
-                                %span.megamenu-sub-title Shortcodes
-                                %ul
-                                  %li
-                                    %a{href: "elements.html"} Elements
-                                  %li
-                                    %a{href: "pricing.html"} Pricing Tables
-                                  %li
-                                    %a{href: "animations.html"} Animations
-                                  %li
-                                    %a{href: "typography.html"} Typography
-                                  %li
-                                    %a{href: "grid.html"} Grid System
-                          .col-md-3
-                            %ul.sub-menu
-                              %li
-                                %span.megamenu-sub-title Header Styles
-                                %ul
-                                  %li
-                                    %a{href: "index.html"} Header Style 1
-                                  %li
-                                    %a{href: "header-style2.html"} Header Style 2
-                                  %li
-                                    %a{href: "header-style3.html"} Header Style 3
-                                  %li
-                                    %a{href: "header-style4.html"} Header Style 4
-                                  %li
-                                    %a{href: "header-style5.html"} Header Style 5
-                                  %li
-                                    %a{href: "header-style6.html"} Header Style 6
-                          .col-md-3
-                            %ul.sub-menu
-                              %li
-                                %span.megamenu-sub-title Footer Styles
-                                %ul
-                                  %li
-                                    %a{href: "index.html#footer"} Footer Style 1
-                                  %li
-                                    %a{href: "footer-style2.html#footer"} Footer Style 2
-                                  %li
-                                    %a{href: "footer-style3.html#footer"} Footer Style 3
-                                  %li
-                                    %a{href: "footer-style4.html#footer"} Footer Style 4
-                %li
-                  %a{href: "portfolio-3cols.html"}
-                    Portfolio
-                    %i.fa.fa-angle-down
-                  %ul.dropdown
-                    %li
-                      %a{href: "portfolio-full-width.html"} Portfolio full width
-                    %li
-                      %a{href: "portfolio-4cols.html"} Portfolio 4 columns
-                    %li
-                      %a{href: "portfolio-3cols.html"} Portfolio 3 columns
-                    %li
-                      %a{href: "portfolio-2cols.html"} Portfolio 2 columns
-                    %li
-                      %a{href: "portfolio-single-standard.html"} Single project - standard
-                    %li
-                      %a{href: "portfolio-full-slider.html"} Single project - full slider
-                    %li
-                      %a{href: "portfolio-full-video.html"} Single project - full video
-                %li
-                  %a{href: "#"}
-                    Pages
-                    %i.fa.fa-angle-down
-                  %ul.dropdown
-                    %li
-                      %a{href: "page-about.html"} About us
-                    %li
-                      %a{href: "page-team.html"} Team
-                    %li
-                      %a{href: "page-careers.html"} Careers
-                    %li
-                      %a{href: "page-services.html"} Services
-                    %li
-                      %a{href: "contact.html"} Contact Us Basic
-                    %li
-                      %a{href: "contact-extended.html"} Contact Us Extended
-                    %li
-                      %a{href: "page-faqs.html"} FAQS
-                    %li
-                      %a{href: "page-login.html"} Login
-                    %li
-                      %a{href: "page-signup.html"} Signup
-                    %li
-                      %a{href: "page-terms.html"} Terms
-                    %li
-                      %a{href: "page-full-width.html"} Full full width
-                    %li
-                      %a{href: "page-right-sidebar.html"} Page right sidebar
-                    %li
-                      %a{href: "page-left-sidebar.html"} Page left sidebar
-                    %li
-                      %a{href: "page-404.html"} 404 Error
-                %li
-                  %a{href: "blog-large-image.html"}
-                    Blog
-                    %i.fa.fa-angle-down
-                  %ul.dropdown
-                    %li
-                      %a{href: "blog-full-width.html"} Blog full width
-                    %li
-                      %a{href: "blog-large-image.html"} Blog large image
-                    %li
-                      %a{href: "blog-medium-image.html"} Blog medium image
-                    %li
-                      %a{href: "blog-post.html"} Blog post
-      / Start Search Box
-      #search-outer
-        #search
-          .container
-            .row
-              #search-box
-                .col-md-10.col-md-offset-3
-                  %form
-                    %input#s{name: "s", placeholder: "Start Typing...", type: "text"}/
-              .search-icon
-                %a#open{href: "#"}
-                  %i.fa.fa-search
-                %a#close{href: "#"}
-                  %i.fa.fa-times
-      %nav.mobile-menu
+    / HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    /[if lt IE 9]
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  %body.home-page
+    .wrapper
+      / ******HEADER******
+      %header.header
+        -# .top-bar
+        -#   .container
+        -#     %ul.social-icons.col-md-6.col-sm-6.col-xs-12.hidden-xs
+        -#       %li
+        -#         %a{href: "#"}
+        -#           %i.fa.fa-twitter
+        -#       %li
+        -#         %a{href: "#"}
+        -#           %i.fa.fa-facebook
+        -#       %li
+        -#         %a{href: "#"}
+        -#           %i.fa.fa-youtube
+        -#       %li
+        -#         %a{href: "#"}
+        -#           %i.fa.fa-linkedin
+        -#       %li
+        -#         %a{href: "#"}
+        -#           %i.fa.fa-google-plus
+        -#       %li.row-end
+        -#         %a{href: "#"}
+        -#           %i.fa.fa-rss
+        -#     / //social-icons
+        -#     %form.pull-right.search-form{role: "search"}
+        -#       .form-group
+        -#         %input.form-control{placeholder: "Search the site...", type: "text"}/
+        -#       %button.btn.btn-theme{type: "submit"} Go
+        / //to-bar
+        .header-main.container
+          %h1.logo.col-md-4.col-sm-4
+            %a{href: "index.html"}
+              %img#logo{alt: "Logo", src: "assets/images/logo.gif"}/
+          / //logo
+          .info.col-md-8.col-sm-8
+            %ul.menu-top.navbar-right.hidden-xs
+              %li.divider
+                %a{href: "index.html"} Home
+              %li.divider
+                %a{href: "faq.html"} FAQ
+              %li
+                %a{href: "contact.html"} Contact
+            / //menu-top
+            %br/
+            .contact.pull-right
+              %p.phone
+                %i.fa.fa-phone>
+                Call us today 0800 123 4567
+              %p.email
+                %i.fa.fa-envelope
+                %a{href: "#"} enquires@website.com
+            / //contact
+          / //info
+        / //header-main
+      / //header
+      / ******NAV******
+      %nav.main-nav{role: "navigation"}
         .container
-          .row
-    = content
+          .navbar-header
+            %button.navbar-toggle{"data-target" => "#navbar-collapse", "data-toggle" => "collapse", type: "button"}
+              %span.sr-only Toggle navigation
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            / //nav-toggle
+          / //navbar-header
+          #navbar-collapse.navbar-collapse.collapse
+            %ul.nav.navbar-nav
+              %li.active.nav-item
+                %a{href: "index.html"} Home
+              %li.nav-item.dropdown
+                %a.dropdown-toggle{"data-close-others" => "false", "data-delay" => "0", "data-hover" => "dropdown", "data-toggle" => "dropdown", href: "#"}
+                  Courses
+                  %i.fa.fa-angle-down
+                %ul.dropdown-menu
+                  %li
+                    %a{href: "courses.html"} Course List
+                  %li
+                    %a{href: "course-single.html"} Single Course (with image)
+                  %li
+                    %a{href: "course-single-2.html"} Single Course (with video)
+              %li.nav-item.dropdown
+                %a.dropdown-toggle{"data-close-others" => "false", "data-delay" => "0", "data-hover" => "dropdown", "data-toggle" => "dropdown", href: "#"}
+                  News
+                  %i.fa.fa-angle-down
+                %ul.dropdown-menu
+                  %li
+                    %a{href: "news.html"} News List
+                  %li
+                    %a{href: "news-single.html"} Single News (with image)
+                  %li
+                    %a{href: "news-single-2.html"} Single News (with video)
+              %li.nav-item
+                %a{href: "events.html"} Events
+              %li.nav-item.dropdown
+                %a.dropdown-toggle{"data-close-others" => "false", "data-delay" => "0", "data-hover" => "dropdown", "data-toggle" => "dropdown", href: "#"}
+                  Pages
+                  %i.fa.fa-angle-down
+                %ul.dropdown-menu
+                  %li
+                    %a{href: "about.html"} About
+                  %li
+                    %a{href: "team.html"} Leadership Team
+                  %li
+                    %a{href: "jobs.html"} Jobs
+                  %li
+                    %a{href: "job-single.html"} Single Job
+                  %li
+                    %a{href: "gallery.html"} Gallery (3 columns)
+                  %li
+                    %a{href: "gallery-2.html"} Gallery (4 columns)
+                  %li
+                    %a{href: "gallery-3.html"} Gallery (2 columns)
+                  %li
+                    %a{href: "gallery-4.html"} Gallery (with sidebar)
+                  %li
+                    %a{href: "gallery-album.html"} Single Gallery
+                  %li
+                    %a{href: "gallery-album-2.html"} Single Gallery (with sidebar)
+                  %li
+                    %a{href: "faq.html"} FAQ
+                  %li
+                    %a{href: "privacy.html"} Privacy Policy
+                  %li
+                    %a{href: "terms-and-conditions.html"} Terms & Conditions
+              / //dropdown
+              %li.nav-item.dropdown
+                %a.dropdown-toggle{"data-close-others" => "false", "data-delay" => "0", "data-hover" => "dropdown", "data-toggle" => "dropdown", href: "#"}
+                  Shortcodes
+                  %i.fa.fa-angle-down
+                %ul.dropdown-menu
+                  %li
+                    %a{href: "typography.html"}
+                      %i.fa.fa-file-text
+                      Typography
+                  %li
+                    %a{href: "tables.html"}
+                      %i.fa.fa-table
+                      Tables
+                  %li
+                    %a{href: "buttons.html"}
+                      %i.fa.fa-star
+                      Buttons
+                  %li
+                    %a{href: "components.html"}
+                      %i.fa.fa-rocket
+                      Components
+                  %li
+                    %a{href: "icons.html"}
+                      %i.fa.fa-heart
+                      Icons
+              / //dropdown
+              %li.nav-item
+                %a{href: "contact.html"} Contact
+            / //nav
+          / //navabr-collapse
+        / //container
+      / //main-nav
+      / ******CONTENT******
+      .content.container
+        = content
     -# %script{type: "text/javascript", src: "/styles/main.js"}

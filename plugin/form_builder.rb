@@ -22,7 +22,8 @@ module FormBuilder
     form_options = {
       class: 'form-horizontal',
       role: 'form',
-      method: 'post'
+      method: 'post',
+      action: options.delete(:url) || "/" + record.class.model_name.plural
     }.merge! options
 
     mab do
@@ -48,7 +49,7 @@ module FormBuilder
     end
 
     def id_for field_name
-      field_name.gsub(/[^a-z]/, '_').gsub(/__/, '_').gsub(/_$/, '')
+      field_name.gsub(/[^a-z0-9]/, '_').gsub(/__/, '_').gsub(/_$/, '')
     end
 
     def wrapper field_name, nested_name, input, options
@@ -99,7 +100,7 @@ module FormBuilder
 
   class Input < Struct.new(:name, :record, :value, :options)
     def id
-      name.gsub(/[^a-z]/, '_').gsub(/__/, '_').gsub(/_$/, '')
+      name.gsub(/[^a-z0-9]/, '_').gsub(/__/, '_').gsub(/_$/, '')
     end
 
     def render
