@@ -52,11 +52,13 @@
         -#       %button.btn.btn-theme{type: "submit"} Go
         / //to-bar
         .header-main.container
-          %h1.logo.col-md-4.col-sm-4
+          %h1.logo.col-md-6.col-sm-6
             %a{href: "index.html"}
               %img#logo{alt: "Logo", src: asset_path('logo.gif')}/
+              .hidden-xs
+                %h3 Young Actor's House
           / //logo
-          .info.col-md-8.col-sm-8
+          .info.col-md-6.col-sm-6
             %ul.menu-top.navbar-right.hidden-xs
               %li.divider
                 %a{href: "index.html"} Home

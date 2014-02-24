@@ -680,6 +680,19 @@ ul.custom-list-style li {
   margin-top: 0;
   margin-bottom: 0;
 }
+#logo {
+  float: left;
+}
+.header h1.logo h3 {
+  font-weight: 800;
+  margin-top: 28px;
+  text-align: left;
+  margin-left: 15px;
+  float: left;
+  color: #49301E;
+  text-transform: uppercase;
+  font-size: 20px;
+}
 .header .menu-top {
   list-style: none;
   margin: 0;
@@ -708,7 +721,7 @@ ul.custom-list-style li {
   color: #d63838;
 }
 .header .contact {
-  font-size: 20px;
+  font-size: 13px;
   font-family: 'open sans', arial, sans-serif;
   font-weight: 300;
   margin-top: 10px;
@@ -718,20 +731,20 @@ ul.custom-list-style li {
   margin-bottom: 0;
 }
 .header .contact p.phone {
-  margin-right: 30px;
+  margin-right: 10px;
 }
 .header .contact p a {
   color: #444444;
 }
 .header .contact .fa {
   color: #d63838;
-  margin-right: 8px;
-  font-size: 18px;
+  margin-right: 4px;
+  font-size: 14px;
   position: relative;
   top: 1px;
 }
 .header .contact .fa.fa-phone {
-  font-size: 22px;
+  font-size: 16px;
   top: 2px;
 }
 .header .search-form {
