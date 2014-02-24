@@ -1,0 +1,7 @@
+- if current_user
+  Logged In. as #{current_user.first_name} #{current_user.last_name}
+
+= form_for user, url: '/login' do |f|
+  = f.input :email
+  = f.input :password
+  = f.submit

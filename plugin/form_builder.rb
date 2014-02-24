@@ -85,6 +85,16 @@ module FormBuilder
       end
     end
 
+    def submit
+      content_for :fields do
+        mab do
+          input type: 'submit', value: 'Login'
+        end
+      end
+
+      nil
+    end
+
     def input field_name, options = {}
       content_for :fields do
         names = [].concat models

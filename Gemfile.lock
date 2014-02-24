@@ -18,6 +18,13 @@ GIT
       unicorn (>= 4.5)
 
 GIT
+  remote: git://github.com/cyx/shield.git
+  revision: 88df5e75dc5dd003cc1dbdb85d8203f9cfb7da96
+  specs:
+    shield (2.1.0)
+      armor
+
+GIT
   remote: git://github.com/visionmedia/commander.git
   revision: 16f099a9ac5038f7f6457a74c98abcd32b269932
   specs:
@@ -43,6 +50,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     arel (4.0.2)
+    armor (0.0.2)
     atomic (1.1.14)
     awesome_print (1.2.0)
     builder (3.1.4)
@@ -192,6 +200,7 @@ DEPENDENCIES
   rspec (= 3.0.0.beta2)
   rugged
   sass
+  shield!
   shotgun
   thin
   tilt (>= 2.0)

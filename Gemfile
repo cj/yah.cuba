@@ -15,6 +15,7 @@ gem 'sass'
 gem 'tilt', '>= 2.0'
 gem 'mab'
 gem 'cuba-sugar', github: 'cj/cuba-sugar'
+gem 'shield', github: 'cyx/shield'
 
 # server
 gem 'shotgun'

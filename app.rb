@@ -6,9 +6,6 @@ require "cuba/render"
 require "./plugin/enviroment"
 Cuba.plugin Environment
 
-# database
-require 'active_record'
-
 # rack
 require "rack/protection"
 
@@ -27,6 +24,13 @@ end
 Cuba.use Rack::Session::Cookie,
   key: ENV["APP_KEY"],
   secret: ENV["APP_SECRET"]
+
+require 'shield'
+
+Cuba.plugin Shield::Helpers
+
+# database
+require 'active_record'
 
 Cuba.use Rack::Protection
 Cuba.use Rack::Reloader
@@ -56,6 +60,26 @@ Cuba.define do
 
   on root do
     run Routes::Home
+  end
+
+  on 'login' do
+    on get do
+      user = User.new
+      res.write view("login", user: user)
+    end
+
+    on post do
+      user = User.new
+
+      if login(User, req[:user]['email'], req[:user]['password'])
+
+        ap 'logged in'
+      else
+        ap 'pass is wrong'
+      end
+
+      res.write view("login", user: user)
+    end
   end
 
   on default do
